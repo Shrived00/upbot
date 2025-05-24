@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 	"os"
+	"strings"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,7 +13,7 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	DATABASE_URL := os.Getenv("DATABASE_URL")
+	DATABASE_URL := strings.TrimSpace(os.Getenv("DATABASE_URL"))
 	if DATABASE_URL == "" {
 		log.Fatal("DATABASE_URL not set in environment")
 	}
