@@ -6,6 +6,7 @@ import (
 
 	"backend/routes"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -15,9 +16,9 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading env")
 	}
-
 	// Initialize Gin router
 	router := gin.Default()
+	router.Use(cors.Default())
 	routes.SetupRouter(router)
 
 	// Run the server
