@@ -31,10 +31,10 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.Default())
 	routes.SetupRouter(router)
+	PORT := os.Getenv("PORT")
 	go worker.NotiWorker()
 	go worker.StartPingWorker()
 
 	// Run the server
-	PORT := os.Getenv("PORT")
 	router.Run(":" + PORT)
 }
