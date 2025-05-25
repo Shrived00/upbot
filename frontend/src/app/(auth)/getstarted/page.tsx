@@ -83,7 +83,7 @@ export default function ProductSignIn() {
                   </div>
                   <p className="text-gray-600 text-sm">
                     Built-in notification system to keep you updated about your
-                    project's status.
+                    project status.
                   </p>
                 </CardContent>
               </Card>

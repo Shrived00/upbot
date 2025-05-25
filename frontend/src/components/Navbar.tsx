@@ -6,7 +6,7 @@ import {
   useScroll,
   motion,
 } from "framer-motion";
-import { House, Logs, Zap, ZapIcon } from "lucide-react";
+import { House, Logs, Zap } from "lucide-react";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -112,7 +112,7 @@ const DockMobile = ({ mobileClassName, NavbarData }: any) => {
         onClick={() => setOpen(!open)}
         className={cn(
           "z-50 flex gap-4 items-end rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4",
-          mobileClassName
+          mobileClassName,
         )}
       >
         <motion.span

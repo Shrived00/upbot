@@ -1,13 +1,10 @@
 "use client";
-import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { AnimateNoti } from "@/components/AnimateNoti";
-import { Footer } from "@/components/Footer";
 import GridPattern from "@/components/ui/grid-pattern";
 import { cn } from "@/lib/utils";
 import RotatingIcons from "@/components/ui/RotatingIcons";
 import Features from "@/components/Features";
-import FlickeringGrid from "@/components/ui/flickering-grid";
 import { FlickeringGridList } from "@/components/Cta";
 export default function LandingPage() {
   return (
@@ -30,7 +27,7 @@ export default function LandingPage() {
           ]}
           className={cn(
             "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-            "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
+            "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
           )}
         />
         <Hero />

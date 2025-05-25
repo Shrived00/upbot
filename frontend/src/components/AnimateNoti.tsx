@@ -93,13 +93,14 @@ const features = [
 notifications = Array.from({ length: 10 }, () => notifications).flat();
 
 const Notification = ({ name, description, icon, time }: Item) => {
+  console.log(features);
   return (
     <figure
       className={cn(
         "relative mx-auto min-h-fit w-full max-w-[400px] cursor-pointer overflow-hidden rounded-2xl p-4",
         "transition-all duration-200 ease-in-out hover:scale-[103%]",
         "bg-gray-800 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-        "transform-gpu dark:bg-transparent dark:backdrop-blur-md dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]"
+        "transform-gpu dark:bg-transparent dark:backdrop-blur-md dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]",
       )}
     >
       <div className="flex flex-row items-center gap-3">
@@ -124,7 +125,7 @@ export function AnimateNoti({ className }: { className?: string }) {
     <div
       className={cn(
         "relative flex h-[500px] w-full flex-col p-6 overflow-hidden rounded-lg border bg-background md:shadow-xl border-none",
-        className
+        className,
       )}
     >
       <AnimatedList>

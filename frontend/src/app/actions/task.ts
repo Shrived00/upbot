@@ -2,7 +2,7 @@
 import { withServerActionAsyncCatcher } from "@/lib/async-wrapper";
 import { SuccessResponse } from "@/lib/success";
 import { getUser } from "./user";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { TAxiosResponse, PingTask } from "@/types";
 import { ServerActionReturnType } from "@/types/api.types";
 import { ErrorHandler } from "@/lib/error";
@@ -30,7 +30,7 @@ const getPings = withServerActionAsyncCatcher(async () => {
   const actionResponse = new SuccessResponse(
     "Pings fetched successfully",
     200,
-    data.additional
+    data.additional,
   );
   return actionResponse.serialize();
 });
@@ -64,19 +64,23 @@ const addTasks = withServerActionAsyncCatcher<
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-      }
+      },
     );
 
     const res = new SuccessResponse(
       "Task added successfully",
       200,
-      response.data
+      response.data,
     );
     return res.serialize();
-  } catch (err: any) {
+  } catch (error: unknown) {
+    const err = error as AxiosError<{ details?: string }>;
+
     console.log(err);
-    console.log(err.response.data);
-    throw new ErrorHandler(err.response.data.details, "BAD_REQUEST");
+    console.log(err.response?.data || err.message || "Unknown error");
+
+    const details = err.response?.data?.details || "Unexpected error";
+    throw new ErrorHandler(details, "BAD_REQUEST");
   }
 });
 
@@ -95,16 +99,18 @@ const reactivateTask = async ({ taskId }: { taskId: number }) => {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
-      }
+      },
     );
 
     const res = new SuccessResponse(
       "Task reactivated successfully",
       200,
-      response.data
+      response.data,
     );
     return res.serialize();
-  } catch (err: any) {
+  } catch (error: unknown) {
+    const err = error as AxiosError;
+
     console.log(err);
     return null;
   }
@@ -125,13 +131,13 @@ const deleteTask = async ({ taskId }: { taskId: number }) => {
         data: {
           taskId: taskId,
         },
-      }
+      },
     );
 
     const res = new SuccessResponse(
       "Task deleted successfully",
       200,
-      response.data
+      response.data,
     );
     return res.serialize();
   } catch (err) {

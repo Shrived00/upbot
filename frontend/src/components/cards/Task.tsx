@@ -16,12 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { PingTask } from "@/types";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  GetLastPingTime,
-  cn,
-  convertTo24HourFormat,
-  formatTime,
-} from "@/lib/utils";
+import { GetLastPingTime, cn, convertTo24HourFormat } from "@/lib/utils";
 import Link from "next/link";
 
 import {
@@ -34,7 +29,6 @@ import { LoopIcon } from "@radix-ui/react-icons";
 import { deleteTask, reactivateTask } from "@/app/actions/task";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
-import { url } from "inspector";
 
 export function TaskCard({ Task }: { Task: PingTask }) {
   const [selectedTask, setSelectedTask] = useState<PingTask | null>(null);
@@ -253,7 +247,7 @@ const TaskLogs = ({
                     key={index}
                     className={cn(
                       "text-sm text-foreground/40 text-left",
-                      log.isSuccess ? "text-green-500" : "text-red-300"
+                      log.isSuccess ? "text-green-500" : "text-red-300",
                     )}
                   >
                     <span className="font-medium">
