@@ -1,32 +1,26 @@
 package models
 
-import (
-	"time"
-
-	"gorm.io/gorm"
-)
+import "time"
 
 type User struct {
-	gorm.Model
-	Email string `json:"email" binding:"required,email"`
-	Tasks []Task `json:"tasks" gorm:"foreignKey:UserID"`
+	ID    string `json:"id" bson:"_id,omitempty"`
+	Email string `json:"email" bson:"email"`
+	Tasks []Task `json:"tasks" bson:"tasks,omitempty"`
 }
+
 type Task struct {
-	gorm.Model
-	URL           string  `json:"url" binding:"required"`
-	IsActive      bool    `json:"isActive"`
-	NotifyDiscord bool    `json:"notifyDiscord" gorm:"default:false"`
-	WebHook       *string `json:"webHook" gorm:"default:NULL"`
-	UserID        uint    `json:"userId"`
-	Logs          []Log   `json:"logs" gorm:"foreignKey:TaskID"`
-	FailCount     int     `json:"failCount" gorm:"default:0"`
+	ID        string `json:"id" bson:"_id,omitempty"`
+	URL       string `json:"url" bson:"url"`
+	IsActive  bool   `json:"isActive" bson:"isActive"`
+	UserID    string `json:"userId" bson:"userId"`
+	FailCount int    `json:"failCount" bson:"failCount"`
+	Logs      []Log  `json:"logs" bson:"logs,omitempty"`
 }
+
 type Log struct {
-	gorm.Model
-	TaskID      uint      `json:"taskId"`
-	Time        time.Time `json:"time"`
-	TimeTake    int64     `json:"timeTake"`
-	LogResponse string    `json:"logResponse"`
-	IsSuccess   bool      `json:"isSuccess"`
-	RespCode    int       `json:"respCode"`
+	Time        time.Time `json:"time" bson:"time"`
+	TimeTake    int64     `json:"timeTake" bson:"timeTake"`
+	LogResponse string    `json:"logResponse" bson:"logResponse"`
+	IsSuccess   bool      `json:"isSuccess" bson:"isSuccess"`
+	RespCode    int       `json:"respCode" bson:"respCode"`
 }
